@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-cofm-phone-photo"
+description = "◈ COFM Save as Phone Photo: re-save images as phone-camera JPEGs with valid EXIF (make, model, lens, exposure, time zone, GPS)."
+version = "1.0.0"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/CrispyVYJ/COFM_SaveAsPhonePhoto"
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "COFM Save as Phone Photo"
+Icon = ""

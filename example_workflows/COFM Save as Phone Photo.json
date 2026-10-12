@@ -1,0 +1,242 @@
+{
+  "id": "018f75d4-a439-47a8-b1e6-c14a2c9a01ad",
+  "revision": 0,
+  "last_node_id": 4,
+  "last_link_id": 1,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "MarkdownNote",
+      "pos": [
+        40,
+        80
+      ],
+      "size": [
+        440,
+        700
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Read me",
+      "properties": {},
+      "widgets_values": [
+        "# ◈ COFM Save as Phone Photo\n\nRe-saves images as phone-camera JPEGs:\n\n- phone sensor size (12MP, or 48/50MP on Pro Max / Ultra)\n- a faint ±1 dither on every pixel\n- a full EXIF block for the chosen phone: make, model, lens, exposure, ISO, capture time with timezone, optional GPS\n\n## Install\n\n1. **Manager → Install via Git URL**:\n   `https://github.com/CrispyVYJ/COFM_SaveAsPhonePhoto`\n2. Or `git clone` that URL into `ComfyUI/custom_nodes/`.\n3. Restart ComfyUI. No extra pip packages are needed.\n\n## Use\n\n**① Single image**: pick an image in Load Image and queue. Connect any IMAGE output (VAE Decode, an upscaler, a detailer) to `images` to phone-save straight out of a generation.\n\n**② Batch a folder**: put images in `ComfyUI/input/<folder>/`, pick that folder in the node, select the node and press **Ctrl+M** to unmute it. Mute ① if you only want the batch.\n\nFiles land in `ComfyUI/output/phone_photos/ComfyUI_00001.jpg` and onward. Nothing is ever overwritten.\n\n## Settings\n\n- **fit**: `center crop` keeps proportions. `stretch` reproduces the old node and squashes anything that isn't 3:4.\n- **gps_location**: also sets the timezone offset. `None` uses your computer's time zone and writes no GPS.\n- **seed**: drives exposure, timing, GPS jitter and noise. Leave on randomize.\n\nEXIF only changes metadata, not the pixels' look. Content Credentials (C2PA) and AI detectors don't rely on EXIF.\n\n## Community\n\nHelp and updates: [t.me/ComfyOFM](https://t.me/ComfyOFM)\n"
+      ],
+      "widgets_values_named": {
+        "text": "# ◈ COFM Save as Phone Photo\n\nRe-saves images as phone-camera JPEGs:\n\n- phone sensor size (12MP, or 48/50MP on Pro Max / Ultra)\n- a faint ±1 dither on every pixel\n- a full EXIF block for the chosen phone: make, model, lens, exposure, ISO, capture time with timezone, optional GPS\n\n## Install\n\n1. **Manager → Install via Git URL**:\n   `https://github.com/CrispyVYJ/COFM_SaveAsPhonePhoto`\n2. Or `git clone` that URL into `ComfyUI/custom_nodes/`.\n3. Restart ComfyUI. No extra pip packages are needed.\n\n## Use\n\n**① Single image**: pick an image in Load Image and queue. Connect any IMAGE output (VAE Decode, an upscaler, a detailer) to `images` to phone-save straight out of a generation.\n\n**② Batch a folder**: put images in `ComfyUI/input/<folder>/`, pick that folder in the node, select the node and press **Ctrl+M** to unmute it. Mute ① if you only want the batch.\n\nFiles land in `ComfyUI/output/phone_photos/ComfyUI_00001.jpg` and onward. Nothing is ever overwritten.\n\n## Settings\n\n- **fit**: `center crop` keeps proportions. `stretch` reproduces the old node and squashes anything that isn't 3:4.\n- **gps_location**: also sets the timezone offset. `None` uses your computer's time zone and writes no GPS.\n- **seed**: drives exposure, timing, GPS jitter and noise. Leave on randomize.\n\nEXIF only changes metadata, not the pixels' look. Content Credentials (C2PA) and AI detectors don't rely on EXIF.\n\n## Community\n\nHelp and updates: [t.me/ComfyOFM](https://t.me/ComfyOFM)\n"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [
+        540,
+        130
+      ],
+      "size": [
+        280,
+        102
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "example.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 3,
+      "type": "COFM_SaveAsPhonePhoto",
+      "pos": [
+        900,
+        130
+      ],
+      "size": [
+        274.9,
+        298
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 1
+        }
+      ],
+      "outputs": [],
+      "title": "Single image (or any IMAGE output)",
+      "properties": {
+        "Node name for S&R": "COFM_SaveAsPhonePhoto",
+        "aux_id": "CrispyVYJ/COFM_SaveAsPhonePhoto"
+      },
+      "widgets_values": [
+        "(images input)",
+        "ComfyUI",
+        "iPhone 15 Pro Max",
+        "12MP",
+        "Random US City",
+        "phone_photos",
+        95,
+        true,
+        "center crop",
+        0,
+        "randomize"
+      ],
+      "widgets_values_named": {
+        "folder": "(images input)",
+        "filename_prefix": "ComfyUI",
+        "phone_model": "iPhone 15 Pro Max",
+        "resolution": "12MP",
+        "gps_location": "Random US City",
+        "output_folder": "phone_photos",
+        "quality": 95,
+        "add_noise": true,
+        "fit": "center crop",
+        "seed": 0,
+        "control_after_generate": "randomize"
+      },
+      "color": "#131B2E",
+      "bgcolor": "#0C121F",
+      "boxcolor": "#4FD6F0",
+      "shape": 2
+    },
+    {
+      "id": 4,
+      "type": "COFM_SaveAsPhonePhoto",
+      "pos": [
+        900,
+        560
+      ],
+      "size": [
+        303.9,
+        298
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "title": "Batch: phone-photo a whole input folder",
+      "properties": {
+        "Node name for S&R": "COFM_SaveAsPhonePhoto",
+        "aux_id": "CrispyVYJ/COFM_SaveAsPhonePhoto"
+      },
+      "widgets_values": [
+        "(images input)",
+        "ComfyUI",
+        "iPhone 15 Pro Max",
+        "12MP",
+        "Random US City",
+        "phone_photos",
+        95,
+        true,
+        "center crop",
+        0,
+        "randomize"
+      ],
+      "widgets_values_named": {
+        "folder": "(images input)",
+        "filename_prefix": "ComfyUI",
+        "phone_model": "iPhone 15 Pro Max",
+        "resolution": "12MP",
+        "gps_location": "Random US City",
+        "output_folder": "phone_photos",
+        "quality": 95,
+        "add_noise": true,
+        "fit": "center crop",
+        "seed": 0,
+        "control_after_generate": "randomize"
+      },
+      "color": "#131B2E",
+      "bgcolor": "#0C121F",
+      "boxcolor": "#4FD6F0",
+      "shape": 2
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "① Single image  —  queue as-is",
+      "bounding": [
+        520,
+        40,
+        760,
+        400
+      ],
+      "color": "#3A5A8C",
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "② Batch a folder  —  muted: select it, Ctrl+M to unmute",
+      "bounding": [
+        520,
+        470,
+        760,
+        420
+      ],
+      "color": "#5A3A8C",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "frontendVersion": "1.55.14"
+  },
+  "version": 0.4
+}
